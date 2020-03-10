@@ -19,9 +19,10 @@ function createStateDataFunction () {
   })
   return methods
 }
+
 export default {
   goods: {
-    actions: { ... createDispatchFunction() },
+    actions: { ...createDispatchFunction() },
     data: { ...createStateDataFunction() }
   }
 }

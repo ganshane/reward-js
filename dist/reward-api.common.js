@@ -1,5 +1,5 @@
 /**
- * reward js api v1.0.4
+ * reward js api v1.0.5
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -163,7 +163,7 @@ var index = {
   config: config,
   store: store,
   api: api$1,
-  version: '1.0.4'
+  version: '1.0.5'
 };
 
 module.exports = index;

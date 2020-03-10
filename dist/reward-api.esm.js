@@ -1,5 +1,5 @@
 /**
- * reward js api v1.0.3
+ * reward js api v1.0.5
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -24,7 +24,9 @@ function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
   });
   return fly.get(url)
     .then(function (res) {
-      return JSON.parse(res.data)
+      if (res.code === 0) {
+        throw new Error(res.msg)
+      } else { return JSON.parse(res.data) }
     })
 }
 /**
@@ -84,6 +86,7 @@ var api = /*#__PURE__*/Object.freeze({
 });
 
 var HAODANKU_API_NAMES = ['itemlist', 'item_detail', 'supersearch', 'super_classify', 'column'];
+
 function createHaodankuState () {
   var s = {};
   HAODANKU_API_NAMES.forEach(function (e) {
@@ -151,11 +154,38 @@ var store = new Vuex.Store({
   }
 });
 
+function createDispatchFunction () {
+  var methods = {};
+  HAODANKU_API_NAMES.forEach(function (el) {
+    methods[el] = function (parameters) {
+      store.dispatch(("goods/" + el), parameters);
+    };
+  });
+  return methods
+}
+function createStateDataFunction () {
+  var methods = {};
+  HAODANKU_API_NAMES.forEach(function (el) {
+    methods[el + '_data'] = function () {
+      return store.state['goods'][el]['data']
+    };
+  });
+  return methods
+}
+
+var api$1 = {
+  goods: {
+    actions: Object.assign({}, createDispatchFunction()),
+    data: Object.assign({}, createStateDataFunction())
+  }
+};
+
 var index_esm = {
   config: config,
   store: store,
-  version: '1.0.3'
+  api: api$1,
+  version: '1.0.5'
 };
 
 export default index_esm;
-export { config, store };
+export { api$1 as api, config, store };
