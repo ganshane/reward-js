@@ -1,6 +1,7 @@
-import fly from 'flyio'
+
 import config from './config'
 
+const fly = require('flyio')
 fly.config.headers = {
   'Content-Type': 'application/x-www-form-urlencoded'
 }

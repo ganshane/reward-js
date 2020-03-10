@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { api } from 'reward'
+import { api } from 'reward-api'
 
 export default {
   computed: {

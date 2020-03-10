@@ -1,6 +1,8 @@
 const path = require('path')
 const buble = require('rollup-plugin-buble')
 const replace = require('rollup-plugin-replace')
+const node_resolve = require('@rollup/plugin-node-resolve')
+
 const version = process.env.VERSION || require('../package.json').version
 const banner =
 `/**
@@ -77,6 +79,7 @@ function genConfig (opts) {
   if (opts.transpile !== false) {
     config.input.plugins.push(buble({ objectAssign: 'Object.assign' }))
   }
+  config.input.plugins.push(node_resolve())
 
   return config
 }

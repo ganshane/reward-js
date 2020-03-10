@@ -40,6 +40,7 @@
     "flyio": "^0.6.14"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "babel-core": "^6.22.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
@@ -63,11 +64,11 @@
     "todomvc-app-css": "^2.1.0",
     "typescript": "^3.7.2",
     "vue": "^2.5.22",
-    "vuex": "^3.0.1",
     "vue-loader": "^15.2.1",
     "vue-template-compiler": "^2.5.22",
     "vuepress": "^0.14.1",
     "vuepress-theme-vue": "^1.1.0",
+    "vuex": "^3.0.1",
     "webpack": "^4.8.3",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.19.1"
