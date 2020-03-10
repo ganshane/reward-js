@@ -1,4 +1,3 @@
-import { UPDATE_GOODS } from './../types'
 import api from './../fetch'
 
 const HAODANKU_API_NAMES = ['itemlist', 'item_detail', 'supersearch', 'super_classify', 'column']
@@ -10,9 +9,8 @@ const createHaodankuState = function () {
   return s
 }
 
-const state = {
-  ... createHaodankuState()
-}
+const state = createHaodankuState()
+
 const createHaodankuApi = function () {
   const methods = {}
   HAODANKU_API_NAMES.forEach(e => {
@@ -23,6 +21,7 @@ const createHaodankuApi = function () {
       })
     }
   })
+
   return methods
 }
 
