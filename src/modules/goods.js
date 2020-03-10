@@ -1,29 +1,43 @@
 import { UPDATE_GOODS } from './../types'
 import api from './../fetch'
 
+const HAODANKU_API_NAMES = ['itemlist', 'item_detail']
+const createHaodankuState = function () {
+  const s = {}
+  HAODANKU_API_NAMES.forEach(e => {
+    s[e] = { 'data': [], 'min_id': 1 }
+  })
+  return s
+}
+
 const state = {
-  list: [],
-  miniId: 1
+  ... createHaodankuState()
+}
+const createHaodankuApi = function () {
+  const methods = {}
+  HAODANKU_API_NAMES.forEach(e => {
+    methods[e] = function ({ commit, state }, parameters) {
+      const parameterWithMinId = Object.assign({ min_id: state[e]['min_id'] }, parameters)
+      api[e].call(this, parameterWithMinId).then(res => {
+        commit(e, res)
+      })
+    }
+  })
+  return methods
 }
 
 const actions = {
-  /**
-   *
-   * @param {store} store 参数
-   * @param {*} nav,cid,back分别参加好单库的API参数说明
-   * @see https://www.haodanku.com/api/detail/show/1.html
-   */
-  findGoods ({ commit, state }, { nav, cid, back }) {
-    api.fetchGoods({ minId: state.miniId, nav, cid, back }).then(res => {
-      commit(UPDATE_GOODS, res)
-    })
-  }
+  ...createHaodankuApi()
 }
+console.log(actions)
 
 const mutations = {
-  [UPDATE_GOODS] (state, res) {
-    state.list.push(...res.data)
-    state.miniId = res.min_id
+  'itemlist' (state, res) {
+    state.itemlist.data.push(...res.data)
+    state.itemlist.min_id = res.min_id
+  },
+  'item_detail' (state, res) {
+    state.item_detail.data = res.data
   }
 }
 

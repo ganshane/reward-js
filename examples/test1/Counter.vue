@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <button @click="findGoods({nav:1})">得到所有产品列表</button> <br/>
-    <p>{{content}}</p>
+    <button @click="itemlist({nav:1})">itemlist</button> <br/>
+    <button @click="item_detail({itemid:'581393598531'})">itemdetail</button> <br/>
+    <p>{{itemlist_data}}</p>
+    <p>{{item_detail_data}}</p>
   </div>
 </template>
 
@@ -10,10 +12,14 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   computed: mapState({
-    content: state => state.goods.list
+    itemlist_data: state => state.goods.itemlist.data,
+    item_detail_data: state => state.goods.item_detail.data
   }),
   methods: {
-    ...mapActions({ findGoods: 'goods/findGoods' })
+    ...mapActions({
+      itemlist: 'goods/itemlist',
+      item_detail: 'goods/item_detail'
+    })
   }
 }
 </script>
