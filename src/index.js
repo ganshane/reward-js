@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 import store from './store'
 import config from './config'
-import api from 'helpers'
+import api from './helpers'
 
 export default {
   config,

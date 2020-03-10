@@ -1,5 +1,5 @@
 /**
- * reward js api v1.0.5
+ * reward js api v1.0.6
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -10,7 +10,6 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var Vue = _interopDefault(require('vue'));
 var Vuex = _interopDefault(require('vuex'));
 var fly = _interopDefault(require('flyio'));
-var api$1 = _interopDefault(require('helpers'));
 
 var config = {
   haodankuApi: 'https://v2.api.haodanku.com',
@@ -159,11 +158,37 @@ var store = new Vuex.Store({
   }
 });
 
+function createDispatchFunction () {
+  var methods = {};
+  HAODANKU_API_NAMES.forEach(function (el) {
+    methods[el] = function (parameters) {
+      store.dispatch(("goods/" + el), parameters);
+    };
+  });
+  return methods
+}
+function createStateDataFunction () {
+  var methods = {};
+  HAODANKU_API_NAMES.forEach(function (el) {
+    methods[el + '_data'] = function () {
+      return store.state['goods'][el]['data']
+    };
+  });
+  return methods
+}
+
+var api$1 = {
+  goods: {
+    actions: Object.assign({}, createDispatchFunction()),
+    data: Object.assign({}, createStateDataFunction())
+  }
+};
+
 var index = {
   config: config,
   store: store,
   api: api$1,
-  version: '1.0.5'
+  version: '1.0.6'
 };
 
 module.exports = index;

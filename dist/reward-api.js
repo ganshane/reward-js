@@ -1,18 +1,17 @@
 /**
- * reward js api v1.0.5
+ * reward js api v1.0.6
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('vue'), require('vuex'), require('flyio'), require('helpers')) :
-  typeof define === 'function' && define.amd ? define(['vue', 'vuex', 'flyio', 'helpers'], factory) :
-  (global = global || self, global.Reward = factory(global.Vue, global.Vuex, global.fly, global.api$1));
-}(this, (function (Vue, Vuex, fly, api$1) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('vue'), require('vuex'), require('flyio')) :
+  typeof define === 'function' && define.amd ? define(['vue', 'vuex', 'flyio'], factory) :
+  (global = global || self, global.Reward = factory(global.Vue, global.Vuex, global.fly));
+}(this, (function (Vue, Vuex, fly) { 'use strict';
 
   Vue = Vue && Object.prototype.hasOwnProperty.call(Vue, 'default') ? Vue['default'] : Vue;
   Vuex = Vuex && Object.prototype.hasOwnProperty.call(Vuex, 'default') ? Vuex['default'] : Vuex;
   fly = fly && Object.prototype.hasOwnProperty.call(fly, 'default') ? fly['default'] : fly;
-  api$1 = api$1 && Object.prototype.hasOwnProperty.call(api$1, 'default') ? api$1['default'] : api$1;
 
   var config = {
     haodankuApi: 'https://v2.api.haodanku.com',
@@ -161,11 +160,37 @@
     }
   });
 
+  function createDispatchFunction () {
+    var methods = {};
+    HAODANKU_API_NAMES.forEach(function (el) {
+      methods[el] = function (parameters) {
+        store.dispatch(("goods/" + el), parameters);
+      };
+    });
+    return methods
+  }
+  function createStateDataFunction () {
+    var methods = {};
+    HAODANKU_API_NAMES.forEach(function (el) {
+      methods[el + '_data'] = function () {
+        return store.state['goods'][el]['data']
+      };
+    });
+    return methods
+  }
+
+  var api$1 = {
+    goods: {
+      actions: Object.assign({}, createDispatchFunction()),
+      data: Object.assign({}, createStateDataFunction())
+    }
+  };
+
   var index = {
     config: config,
     store: store,
     api: api$1,
-    version: '1.0.5'
+    version: '1.0.6'
   };
 
   return index;
