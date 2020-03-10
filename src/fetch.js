@@ -13,7 +13,9 @@ function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
   })
   return fly.get(url)
     .then(res => {
-      return JSON.parse(res.data)
+      if (res.code === 0) {
+        throw new Error(res.msg)
+      } else return JSON.parse(res.data)
     })
 }
 /**

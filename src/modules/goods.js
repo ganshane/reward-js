@@ -1,6 +1,6 @@
 import * as api from './../fetch'
+import { HAODANKU_API_NAMES } from './../constants'
 
-const HAODANKU_API_NAMES = ['itemlist', 'item_detail', 'supersearch', 'super_classify', 'column']
 function createHaodankuState () {
   const s = {}
   HAODANKU_API_NAMES.forEach(e => {

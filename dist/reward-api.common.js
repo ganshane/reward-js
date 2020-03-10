@@ -1,5 +1,5 @@
 /**
- * reward js api v1.0.3
+ * reward js api v1.0.4
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -10,6 +10,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var Vue = _interopDefault(require('vue'));
 var Vuex = _interopDefault(require('vuex'));
 var fly = _interopDefault(require('flyio'));
+var api$1 = _interopDefault(require('helpers'));
 
 var config = {
   haodankuApi: 'https://v2.api.haodanku.com',
@@ -28,7 +29,9 @@ function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
   });
   return fly.get(url)
     .then(function (res) {
-      return JSON.parse(res.data)
+      if (res.code === 0) {
+        throw new Error(res.msg)
+      } else { return JSON.parse(res.data) }
     })
 }
 /**
@@ -88,6 +91,7 @@ var api = /*#__PURE__*/Object.freeze({
 });
 
 var HAODANKU_API_NAMES = ['itemlist', 'item_detail', 'supersearch', 'super_classify', 'column'];
+
 function createHaodankuState () {
   var s = {};
   HAODANKU_API_NAMES.forEach(function (e) {
@@ -158,7 +162,8 @@ var store = new Vuex.Store({
 var index = {
   config: config,
   store: store,
-  version: '1.0.3'
+  api: api$1,
+  version: '1.0.4'
 };
 
 module.exports = index;

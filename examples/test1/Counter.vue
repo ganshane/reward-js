@@ -14,24 +14,17 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { api } from 'reward'
 
 export default {
-  computed: mapState({
-    itemlist_data: state => state.goods.itemlist.data,
-    item_detail_data: state => state.goods.item_detail.data,
-    supersearch_data: state => state.goods.supersearch.data,
-    super_classify_data: state => state.goods.super_classify.data,
-    column_data: state => state.goods.column.data
-  }),
+  computed: {
+    ... api.goods.data
+  },
   methods: {
-    ...mapActions({
-      itemlist: 'goods/itemlist',
-      item_detail: 'goods/item_detail',
-      supersearch: 'goods/supersearch',
-      super_classify: 'goods/super_classify',
-      column: 'goods/column'
-    })
+    ... api.goods.actions
+  },
+  created () {
+    api.goods.actions.itemlist()
   }
 }
 </script>
