@@ -1,7 +1,7 @@
 import { UPDATE_GOODS } from './../types'
 import api from './../fetch'
 
-const HAODANKU_API_NAMES = ['itemlist', 'item_detail']
+const HAODANKU_API_NAMES = ['itemlist', 'item_detail', 'supersearch', 'super_classify', 'column']
 const createHaodankuState = function () {
   const s = {}
   HAODANKU_API_NAMES.forEach(e => {
@@ -38,6 +38,18 @@ const mutations = {
   },
   'item_detail' (state, res) {
     state.item_detail.data = res.data
+  },
+  'supersearch' (state, res) {
+    state.supersearch.data.push(...res.data)
+    state.supersearch.min_id = res.min_id
+  },
+  'super_classify' (state, res) {
+    state.super_classify.data = res.data
+    // state.super_classify.min_id = res.min_id
+  },
+  'column' (state, res) {
+    state.column.data.push(...res.data)
+    state.column.min_id = res.min_id
   }
 }
 
