@@ -1,5 +1,5 @@
 /**
- * reward js api v1.0.1
+ * reward js api v1.0.2
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -145,7 +145,7 @@ var store = new Vuex.Store({
 var index_esm = {
   config,
   store,
-  version: '1.0.1'
+  version: '1.0.2'
 };
 
 export default index_esm;
