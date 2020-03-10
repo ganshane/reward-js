@@ -1,7 +1,7 @@
-import api from './../fetch'
+import * as api from './../fetch'
 
 const HAODANKU_API_NAMES = ['itemlist', 'item_detail', 'supersearch', 'super_classify', 'column']
-const createHaodankuState = function () {
+function createHaodankuState () {
   const s = {}
   HAODANKU_API_NAMES.forEach(e => {
     s[e] = { 'data': [], 'min_id': 1 }
@@ -9,9 +9,7 @@ const createHaodankuState = function () {
   return s
 }
 
-const state = createHaodankuState()
-
-const createHaodankuApi = function () {
+function createHaodankuApi () {
   const methods = {}
   HAODANKU_API_NAMES.forEach(e => {
     methods[e] = function ({ commit, state }, parameters) {
@@ -24,11 +22,6 @@ const createHaodankuApi = function () {
 
   return methods
 }
-
-const actions = {
-  ...createHaodankuApi()
-}
-console.log(actions)
 
 const mutations = {
   'itemlist' (state, res) {
@@ -54,7 +47,7 @@ const mutations = {
 
 export default {
   namespaced: true,
-  state,
-  actions,
+  state: createHaodankuState(),
+  actions: createHaodankuApi(),
   mutations
 }

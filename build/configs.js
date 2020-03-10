@@ -75,7 +75,7 @@ function genConfig (opts) {
   }
 
   if (opts.transpile !== false) {
-    config.input.plugins.push(buble({ objectAssign: 'Object.assign' }))
+    config.input.plugins.push(buble())
   }
 
   return config

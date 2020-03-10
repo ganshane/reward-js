@@ -1,5 +1,5 @@
 /**
- * reward js api v1.0.2
+ * reward js api v1.0.3
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -16,7 +16,7 @@ fly.config.headers = {
   'Content-Type': 'application/x-www-form-urlencoded'
 };
 
-const baseHaodanku = function (apiName, parameterNames, defaultParameters, parameters) {
+function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
   const values = Object.assign(defaultParameters, parameters);
   let url = config.haodankuApi + '/' + apiName + '/apikey/' + config.haodankuKey;
   parameterNames.forEach(name => {
@@ -26,68 +26,73 @@ const baseHaodanku = function (apiName, parameterNames, defaultParameters, param
     .then(res => {
       return JSON.parse(res.data)
     })
-};
-var api = {
-  /**
+}
+/**
    * 商品列表页API
    * https://www.haodanku.com/api/detail/show/1.html
    * @param {*} parameters 见API描述页
    */
-  itemlist (parameters) {
-    const parameterNames = ['nav', 'cid', 'back', 'min_id', 'sort', 'price_min', 'price_max', 'sale_min', 'sale_max', 'coupon_min', 'coupon_max', 'tkrates_min', 'tkrates_max', 'tkmoney_min', 'item_type'];
-    const defaultParameters = { nav: 3, cid: 0, back: 10, minId: 1 };
-    return baseHaodanku('itemlist', parameterNames, defaultParameters, parameters)
-  },
-  /**
+const itemlist = (parameters) => {
+  const parameterNames = ['nav', 'cid', 'back', 'min_id', 'sort', 'price_min', 'price_max', 'sale_min', 'sale_max', 'coupon_min', 'coupon_max', 'tkrates_min', 'tkrates_max', 'tkmoney_min', 'item_type'];
+  const defaultParameters = { nav: 3, cid: 0, back: 10, minId: 1 };
+  return baseHaodanku('itemlist', parameterNames, defaultParameters, parameters)
+};
+/**
    * 单品详情API
    * https://www.haodanku.com/api/detail/show/16.html
    * @param {*} parameters 见API描述页
    */
-  item_detail (parameters) {
-    const parameterNames = ['itemid'];
-    return baseHaodanku('item_detail', parameterNames, {}, parameters)
-  },
-  /**
+const item_detail = (parameters) => {
+  const parameterNames = ['itemid'];
+  return baseHaodanku('item_detail', parameterNames, {}, parameters)
+};
+/**
    * 超级搜索API
    * https://www.haodanku.com/api/detail/show/19.html
    * @param {*} parameters 见API描述页
    */
-  supersearch (parameters) {
-    const parameterNames = ['keyword', 'back', 'min_id', 'tb_p', 'sort', 'is_tmall', 'is_coupon', 'limitrate', 'startprice'];
-    return baseHaodanku('supersearch', parameterNames, {}, parameters)
-  },
-  /**
+const supersearch = (parameters) => {
+  const parameterNames = ['keyword', 'back', 'min_id', 'tb_p', 'sort', 'is_tmall', 'is_coupon', 'limitrate', 'startprice'];
+  return baseHaodanku('supersearch', parameterNames, {}, parameters)
+};
+/**
    * 超级分类API
    * https://www.haodanku.com/api/detail/show/9.html
    * @param {*} parameters 见API描述页
    */
-  super_classify (parameters) {
-    const parameterNames = [];
-    return baseHaodanku('super_classify', parameterNames, {}, parameters)
-  },
-  /**
+const super_classify = (parameters) => {
+  const parameterNames = [];
+  return baseHaodanku('super_classify', parameterNames, {}, parameters)
+};
+/**
    * 超级分类API
    * https://www.haodanku.com/api/detail/show/9.html
    * @param {*} parameters 见API描述页
    */
-  column (parameters) {
-    const parameterNames = ['type', 'back', 'min_id', 'sort', 'cid', 'price_min', 'price_max', 'sale_min', 'sale_max', 'coupon_min', 'coupon_max', 'item_type'];
-    return baseHaodanku('column', parameterNames, {}, parameters)
-  }
+const column = (parameters) => {
+  const parameterNames = ['type', 'back', 'min_id', 'sort', 'cid', 'price_min', 'price_max', 'sale_min', 'sale_max', 'coupon_min', 'coupon_max', 'item_type'];
+  return baseHaodanku('column', parameterNames, {}, parameters)
 };
 
+var api = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  itemlist: itemlist,
+  item_detail: item_detail,
+  supersearch: supersearch,
+  super_classify: super_classify,
+  column: column
+});
+
 const HAODANKU_API_NAMES = ['itemlist', 'item_detail', 'supersearch', 'super_classify', 'column'];
-const createHaodankuState = function () {
+function createHaodankuState () {
   const s = {};
   HAODANKU_API_NAMES.forEach(e => {
     s[e] = { 'data': [], 'min_id': 1 };
   });
   return s
-};
+}
 
-const state = createHaodankuState();
-
-const createHaodankuApi = function () {
+function createHaodankuApi () {
   const methods = {};
   HAODANKU_API_NAMES.forEach(e => {
     methods[e] = function ({ commit, state }, parameters) {
@@ -99,12 +104,7 @@ const createHaodankuApi = function () {
   });
 
   return methods
-};
-
-const actions = {
-  ...createHaodankuApi()
-};
-console.log(actions);
+}
 
 const mutations = {
   'itemlist' (state, res) {
@@ -130,8 +130,8 @@ const mutations = {
 
 var goods = {
   namespaced: true,
-  state,
-  actions,
+  state: createHaodankuState(),
+  actions: createHaodankuApi(),
   mutations
 };
 
@@ -145,7 +145,7 @@ var store = new Vuex.Store({
 var index_esm = {
   config,
   store,
-  version: '1.0.2'
+  version: '1.0.3'
 };
 
 export default index_esm;
