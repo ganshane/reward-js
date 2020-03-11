@@ -33,7 +33,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      'reward-api': path.resolve(__dirname, '../src/index.esm.js')
+      'reward-api': path.resolve(__dirname, '../src/index.js')
     }
   },
 
