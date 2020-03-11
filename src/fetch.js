@@ -1,7 +1,17 @@
 
 import config from './config'
 
-const fly = require('flyio')
+function createFlyInstance () {
+  if (config.isWx || typeof (wx) !== undefined) {
+    const Fly = require('flyio/dist/npm/wx')
+    return new Fly()
+  } else {
+    return require('flyio')
+  }
+}
+
+const fly = createFlyInstance()
+
 fly.config.headers = {
   'Content-Type': 'application/x-www-form-urlencoded'
 }
@@ -15,6 +25,7 @@ function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
   return fly.get(url)
     .then(res => {
       if (res.code === 0) {
+        console.error('抓取数据失败,服务器消息:', res.msg)
         throw new Error(res.msg)
       } else return JSON.parse(res.data)
     })
