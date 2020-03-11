@@ -2,7 +2,7 @@
 import config from './config'
 
 function createFlyInstance () {
-  if (config.isWx || typeof (wx) !== undefined) {
+  if (config.isWx || typeof (wx) !== 'undefined') {
     const Fly = require('flyio/dist/npm/wx')
     return new Fly()
   } else {
@@ -27,7 +27,10 @@ function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
       if (res.code === 0) {
         console.error('抓取数据失败,服务器消息:', res.msg)
         throw new Error(res.msg)
-      } else return JSON.parse(res.data)
+      } else {
+        if (typeof (res.data) === 'string') return JSON.parse(res.data)
+        else return res.data
+      }
     })
 }
 /**

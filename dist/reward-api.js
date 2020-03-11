@@ -1,5 +1,5 @@
 /**
- * reward js api v1.0.7
+ * reward js api v1.0.8
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -9502,7 +9502,7 @@
   };
 
   function createFlyInstance () {
-    if (config$1.isWx || typeof (wx) !== undefined) {
+    if (config$1.isWx || typeof (wx) !== 'undefined') {
       var Fly = require('flyio/dist/npm/wx');
       return new Fly()
     } else {
@@ -9527,7 +9527,10 @@
         if (res.code === 0) {
           console.error('抓取数据失败,服务器消息:', res.msg);
           throw new Error(res.msg)
-        } else { return JSON.parse(res.data) }
+        } else {
+          if (typeof (res.data) === 'string') { return JSON.parse(res.data) }
+          else { return res.data }
+        }
       })
   }
   /**
@@ -9685,7 +9688,7 @@
     config: config$1,
     store: store,
     api: api$1,
-    version: '1.0.7'
+    version: '1.0.8'
   };
 
   return index$1;
