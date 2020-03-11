@@ -4,11 +4,15 @@ import Vuex from 'vuex'
 import store from './store'
 import config from './config'
 import api from './helpers'
-// import * as rest from './api'
+import * as wxApi from './api/wx'
+export class UserNotAuthorized {}
 
 export {
   config,
   store,
-  api
+  api,
+  wxApi
 }
+
 export * from './api'
+

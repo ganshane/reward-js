@@ -1,6 +1,6 @@
 export default {
   haodankuApi: 'https://v2.api.haodanku.com',
   haodankuKey: 'maxd',
-  api: 'http://localhost:8080',
+  api: 'https://api.gofanli.cn',
   isWx: false
 }
