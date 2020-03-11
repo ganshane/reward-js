@@ -36,7 +36,7 @@ const mutations = {
     state.supersearch.min_id = res.min_id
   },
   'super_classify' (state, res) {
-    state.super_classify.data = res.data
+    state.super_classify.data = res.general_classify
     // state.super_classify.min_id = res.min_id
   },
   'column' (state, res) {

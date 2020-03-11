@@ -24,12 +24,12 @@ function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
   })
   return fly.get(url)
     .then(res => {
-      if (res.code === 0) {
-        console.error('抓取数据失败,服务器消息:', res.msg)
-        throw new Error(res.msg)
+      const resData = (typeof (res.data) === 'string') ? JSON.parse(res.data) : res.data
+      if (resData.code === 0) {
+        console.error('抓取数据失败,服务器消息:', resData.msg)
+        throw new Error(resData.msg)
       } else {
-        if (typeof (res.data) === 'string') return JSON.parse(res.data)
-        else return res.data
+        return resData
       }
     })
 }

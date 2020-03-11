@@ -20,9 +20,11 @@ function createStateDataFunction () {
   return methods
 }
 
-export default {
+const helpers = {
   goods: {
-    actions: { ...createDispatchFunction() },
-    data: { ...createStateDataFunction() }
+    actions: createDispatchFunction(),
+    data: createStateDataFunction()
   }
 }
+
+export default helpers
