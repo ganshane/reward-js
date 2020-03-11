@@ -5,9 +5,8 @@ import store from './store'
 import config from './config'
 import api from './helpers'
 
-export default {
+export {
   config,
   store,
-  api,
-  version: '__VERSION__'
+  api
 }
