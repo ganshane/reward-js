@@ -1,5 +1,5 @@
 /**
- * reward js api v1.0.8
+ * reward js api v1.0.9
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -9688,7 +9688,7 @@
     config: config$1,
     store: store,
     api: api$1,
-    version: '1.0.8'
+    version: '1.0.9'
   };
 
   return index$1;
