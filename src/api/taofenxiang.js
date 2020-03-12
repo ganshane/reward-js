@@ -60,6 +60,18 @@ export default {
   user: {
     info () {
       return fly.get(`${config.api}/user/info`).then(res => res.data)
+    },
+    sendSms (phone) {
+      return fly.post(`${config.api}/user/sendSms`)
+    },
+    login ({ phone, code }) {
+      return fly.post(`${config.api}/user/login`,
+        { phone, code }, { headers: { 'content-type': 'application/x-www-form-urlencoded' }}
+      ).then(res => {
+        const data = res.data
+        fly.config.headers = Object.assign(fly.config.headers, { 'Authorization': 'Bearer ' + data.token })
+        return data
+      })
     }
   },
   wx: {
