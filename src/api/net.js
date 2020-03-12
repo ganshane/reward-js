@@ -11,8 +11,8 @@ function createFlyInstance () {
 
 const fly = createFlyInstance()
 
-fly.config.headers = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-}
+// fly.config.headers = {
+//   'Content-Type': 'application/x-www-form-urlencoded'
+// }
 
 export default fly
