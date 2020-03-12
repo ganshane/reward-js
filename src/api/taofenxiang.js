@@ -3,9 +3,9 @@ import fly from './net'
 
 export default {
   admin: {
-    post_cards ({ no, owner_id, secret }) {
+    post_cards ({ no, secret, amount, created_id }) {
       return fly.post(`${config.api}/admin/cards`,
-        { no, owner_id, secret }, { headers: { 'content-type': 'application/x-www-form-urlencoded' }}
+        { no, secret, amount, created_id }, { headers: { 'content-type': 'application/x-www-form-urlencoded' }}
       ).then(res => {
         return res.data
       })
