@@ -3,7 +3,7 @@ import fly from './net'
 
 // remove Authorization header
 fly.interceptors.request.use((request) => {
-  if (request.url.indexOf('haodanku') > 0) {
+  if (request.url.indexOf('haodanku.com') > 0) {
     delete request.headers['Authorization']
   }
 })
@@ -13,7 +13,7 @@ function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
   const values = Object.assign(defaultParameters, parameters)
   let url = config.haodankuApi + '/' + apiName + '/apikey/' + config.haodankuKey
   parameterNames.forEach(name => {
-    if (values[name] !== undefined) url += '/' + name + '/' + values[name]
+    if (values.hasOwnProperty(name)) { url += '/' + name + '/' + values[name] }
   })
   return fly.get(url, {}, FORM_DATA_HEADER)
     .then(res => {
