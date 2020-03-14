@@ -1,6 +1,6 @@
 {
   "name": "reward-api",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "js api for reward app",
   "main": "src/index.js",
   "files": [
