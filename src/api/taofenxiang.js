@@ -9,22 +9,29 @@ const getApi = (api, data) => fly.get(`${config.api}${api}`, data).then(res => r
 const internalSetToken = (token) => { fly.config.headers = Object.assign(fly.config.headers, { 'Authorization': 'Bearer ' + token }) }
 export default {
   public: {
-    announces: () => getApi('/public/announces')
+    announces: () => getApi('/public/announces'),
+    slides: () => getApi('/public/slides')
   },
   admin: {
-    post_cards: ({ no, secret, amount, created_id }) => postApi('/admin/cards', { no, secret, amount, created_id }),
-    cards: ({ page, size, sort }) => postApi('/admin/cards', { page, size, sort }),
-    announces: () => getApi('/admin/announces/list'),
-    add_announce: ({ content, url }) => postApi('/admin/announces', { content, url }),
-    delete_announces: (id) => postApi('/admin/announces/delete', { id }),
+    add_card: ({ no, secret, amount, created_id }) => postApi('/admin/card/add', { no, secret, amount, created_id }),
+    cards: ({ page, size, sort }) => postApi('/admin/card/list', { page, size, sort }),
+
+    add_slide: ({ img_url, url, status }) => postApi('/admin/slide/add', { img_url, url, status }),
+    delete_slide: (id) => postApi('/admin/slide/delete', { id }),
+    update_status: ({ id, status }) => postApi('/admin/slide/status', { id, status }),
+    slides: () => getApi('/admin/slide/list'),
+
+    add_announce: ({ content, url }) => postApi('/admin/announce/add', { content, url }),
+    delete_announce: (id) => postApi('/admin/announce/delete', { id }),
+    announces: () => getApi('/admin/announce/list'),
     users: ({ page, size, sort }) => postApi('/admin/users', { page, size, sort })
   },
   consumption: {
-    post: ({ amount, item_id, item_img, item_link }) => postApi('/consumption', { amount, item_id, item_img, item_link }),
+    add: ({ amount, item_id, item_img, item_link }) => postApi('/consumption/add', { amount, item_id, item_img, item_link }),
     list: ({ page, size, sort }) => postApi('/consumption/list', { page, size, sort })
   },
   recharge: {
-    post: ({ no, secret }) => postApi('/recharge', { no, secret }),
+    add: ({ no, secret }) => postApi('/recharge/add', { no, secret }),
     list: ({ page, size, sort }) => postApi('/recharge/list', { page, size, sort })
   },
   user: {
