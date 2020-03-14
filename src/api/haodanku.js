@@ -1,6 +1,13 @@
 import config from '../config'
 import fly from './net'
 
+// remove Authorization header
+fly.interceptors.request.use((request) => {
+  if (request.url.indexOf('haodanku') > 0) {
+    delete request.headers['Authorization']
+  }
+})
+
 const FORM_DATA_HEADER = { headers: { 'content-type': 'application/x-www-form-urlencoded' }}
 function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
   const values = Object.assign(defaultParameters, parameters)
