@@ -51,38 +51,68 @@ export const ratesurl = (parameters) => {
 }
 
 /**
+ * 今日值得买API
+ * https://www.haodanku.com/api/detail/show/28.html
+ */
+export const get_deserve_item = () => {
+  const parameterNames = []
+  return baseHaodanku('get_deserve_item', parameterNames, {}, {})
+}
+/**
+ * 抖货商品API
+ * https://www.haodanku.com/api/detail/show/32.html
+ * @param {min_id,cat_id,order,back} parameters itemid
+ */
+export const get_trill_data = (parameters) => {
+  const parameterNames = ['min_id', 'cat_id', 'order', 'back']
+  return baseHaodanku('get_trill_data', parameterNames, {}, parameters)
+}
+/**
+ * 精选低价包邮专区API
+ * https://www.haodanku.com/api/detail/show/36.html
+ * @param {min_id, order, type} parameters itemid
+ */
+export const low_price_Pinkage_data = (parameters) => {
+  const parameterNames = ['min_id', 'order', 'type']
+  return baseHaodanku('low_price_Pinkage_data', parameterNames, {}, parameters)
+}
+/**
+ * 品牌列表API
  * https://www.haodanku.com/api/detail/show/31.html
- * @param {itemid} parameters itemid
+ * @param {min_id, back, brandcat} parameters itemid
  */
 export const brandinfo = (parameters) => {
   const parameterNames = ['min_id', 'back', 'brandcat']
   return baseHaodanku('brandinfo', parameterNames, {}, parameters)
 }
 /**
+ * 各大榜单API
  * https://www.haodanku.com/api/detail/show/29.html
- * @param {itemid} parameters itemid
+ * @param {sale_type, min_id, cid, back, item_type} parameters itemid
  */
 export const sales_list = (parameters) => {
   const parameterNames = ['sale_type', 'min_id', 'cid', 'back', 'item_type']
   return baseHaodanku('sales_list', parameterNames, {}, parameters)
 }
 /**
+ * 朋友圈API
  * https://www.haodanku.com/api/detail/show/23.html
- * @param {itemid} parameters itemid
+ * @param {min_id} parameters itemid
  */
 export const selected_item = (parameters) => {
   const parameterNames = ['min_id']
   return baseHaodanku('selected_item', parameterNames, {}, parameters)
 }
 /**
- * https://www.haodanku.com/api/detail/show/17.html
- * @param {itemid} parameters itemid
+ * 热搜关键词记录API
+ * https://www.haodanku.com/api/detail/show/6.html
  */
 export const hot_key = () => {
   const parameterNames = []
   return baseHaodanku('hot_key', parameterNames, {}, {})
 }
 /**
+ * 猜你喜欢API
  * https://www.haodanku.com/api/detail/show/17.html
  * @param {itemid} parameters itemid
  */
@@ -93,7 +123,7 @@ export const get_similar_info = (parameters) => {
 /**
    * 单品详情API
    * https://www.haodanku.com/api/detail/show/16.html
-   * @param {*} parameters 见API描述页
+   * @param {itemid} parameters 见API描述页
    */
 export const item_detail = (parameters) => {
   const parameterNames = ['itemid']
@@ -111,15 +141,14 @@ export const supersearch = (parameters) => {
 /**
    * 超级分类API
    * https://www.haodanku.com/api/detail/show/9.html
-   * @param {*} parameters 见API描述页
    */
 export const super_classify = (parameters) => {
   const parameterNames = []
   return baseHaodanku('super_classify', parameterNames, {}, parameters)
 }
 /**
-   * 超级分类API
-   * https://www.haodanku.com/api/detail/show/9.html
+ * 商品筛选API
+   * https://www.haodanku.com/api/detail/show/3.html
    * @param {*} parameters 见API描述页
    */
 export const column = (parameters) => {
