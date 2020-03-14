@@ -49,6 +49,47 @@ export const ratesurl = (parameters) => {
       }
     })
 }
+
+/**
+ * https://www.haodanku.com/api/detail/show/31.html
+ * @param {itemid} parameters itemid
+ */
+export const brandinfo = (parameters) => {
+  const parameterNames = ['min_id', 'back', 'brandcat']
+  return baseHaodanku('brandinfo', parameterNames, {}, parameters)
+}
+/**
+ * https://www.haodanku.com/api/detail/show/29.html
+ * @param {itemid} parameters itemid
+ */
+export const sales_list = (parameters) => {
+  const parameterNames = ['sale_type', 'min_id', 'cid', 'back', 'item_type']
+  return baseHaodanku('sales_list', parameterNames, {}, parameters)
+}
+/**
+ * https://www.haodanku.com/api/detail/show/23.html
+ * @param {itemid} parameters itemid
+ */
+export const selected_item = (parameters) => {
+  const parameterNames = ['min_id']
+  return baseHaodanku('selected_item', parameterNames, {}, parameters)
+}
+/**
+ * https://www.haodanku.com/api/detail/show/17.html
+ * @param {itemid} parameters itemid
+ */
+export const hot_key = () => {
+  const parameterNames = []
+  return baseHaodanku('hot_key', parameterNames, {}, {})
+}
+/**
+ * https://www.haodanku.com/api/detail/show/17.html
+ * @param {itemid} parameters itemid
+ */
+export const get_similar_info = (parameters) => {
+  const parameterNames = ['itemid']
+  return baseHaodanku('get_similar_info', parameterNames, {}, parameters)
+}
 /**
    * 单品详情API
    * https://www.haodanku.com/api/detail/show/16.html
