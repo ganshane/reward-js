@@ -1,13 +1,14 @@
 import config from '../config'
 import fly from './net'
 
+const FORM_DATA_HEADER = { headers: { 'content-type': 'application/x-www-form-urlencoded' }}
 function baseHaodanku (apiName, parameterNames, defaultParameters, parameters) {
   const values = Object.assign(defaultParameters, parameters)
   let url = config.haodankuApi + '/' + apiName + '/apikey/' + config.haodankuKey
   parameterNames.forEach(name => {
     if (values[name] !== undefined) url += '/' + name + '/' + values[name]
   })
-  return fly.get(url)
+  return fly.get(url, {}, FORM_DATA_HEADER)
     .then(res => {
       const resData = (typeof (res.data) === 'string') ? JSON.parse(res.data) : res.data
       if (resData.code === 0) {
@@ -27,6 +28,26 @@ export const itemlist = (parameters) => {
   const parameterNames = ['nav', 'cid', 'back', 'min_id', 'sort', 'price_min', 'price_max', 'sale_min', 'sale_max', 'coupon_min', 'coupon_max', 'tkrates_min', 'tkrates_max', 'tkmoney_min', 'item_type']
   const defaultParameters = { nav: 3, cid: 0, back: 10, minId: 1 }
   return baseHaodanku('itemlist', parameterNames, defaultParameters, parameters)
+}
+
+/**
+ * 高佣api调用
+ * https://www.haodanku.com/api/detail/show/15.html
+ * @param {itemid} parameters  商品id
+ */
+export const ratesurl = (parameters) => {
+  const defaultParameters = { 'apikey': config.haodankuKey, 'tb_name': config.haodanku_taobao_name, 'pid': config.taobaoke_pid }
+  const values = Object.assign(defaultParameters, parameters)
+  return fly.post(`${config.haodanku_taobao_name}/ratesurl`, values, FORM_DATA_HEADER)
+    .then(res => {
+      const resData = (typeof (res.data) === 'string') ? JSON.parse(res.data) : res.data
+      if (resData.code === 0) {
+        console.error('抓取数据失败,服务器消息:', resData.msg)
+        throw new Error(resData.msg)
+      } else {
+        return resData
+      }
+    })
 }
 /**
    * 单品详情API

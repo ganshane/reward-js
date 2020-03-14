@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Counter from './Counter.vue'
 import { config, store } from 'reward-api'
 
-config.haodankuKey = 'asdf'
+config.haodankuKey = 'gofanli'
 config.isWx = true
 Vue.prototype.$store = store
 

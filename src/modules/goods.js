@@ -14,7 +14,7 @@ function createHaodankuApi () {
   HAODANKU_API_NAMES.forEach(e => {
     methods[e] = function ({ commit, state }, parameters) {
       const parameterWithMinId = Object.assign({ min_id: state[e]['min_id'] }, parameters)
-      rest[e].call(this, parameterWithMinId).then(res => {
+      rest['haodanku'][e].call(this, parameterWithMinId).then(res => {
         commit(e, res)
       })
     }
