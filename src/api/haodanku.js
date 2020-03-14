@@ -42,7 +42,7 @@ export const ratesurl = (parameters) => {
     .then(res => {
       const resData = (typeof (res.data) === 'string') ? JSON.parse(res.data) : res.data
       if (resData.code === 0) {
-        console.error('抓取数据失败,服务器消息:', resData.msg)
+        console.error('抓取数据失败,msg:', resData.msg)
         throw new Error(resData.msg)
       } else {
         return resData
