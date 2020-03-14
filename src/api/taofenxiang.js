@@ -2,90 +2,48 @@ import config from '../config'
 import fly from './net'
 const FORM_DATA_HEADER = { headers: { 'content-type': 'application/x-www-form-urlencoded' }}
 
+const postApi = (api, data) => {
+  return fly.post(`${config.api}${api}`, data, FORM_DATA_HEADER).then(res => res.data)
+}
+const getApi = (api, data) => fly.get(`${config.api}${api}`, data).then(res => res.data)
+const internalSetToken = (token) => { fly.config.headers = Object.assign(fly.config.headers, { 'Authorization': 'Bearer ' + token }) }
 export default {
+  public: {
+    announces: () => getApi('/public/announces')
+  },
   admin: {
-    post_cards ({ no, secret, amount, created_id }) {
-      return fly.post(`${config.api}/admin/cards`,
-        { no, secret, amount, created_id }, FORM_DATA_HEADER
-      ).then(res => {
-        return res.data
-      })
-    },
-    cards ({ page, size, sort }) {
-      return fly.get(`${config.api}/admin/cards`,
-        { page, size, sort }
-      ).then(res => {
-        return res.data
-      })
-    },
-    users ({ page, size, sort }) {
-      return fly.get(`${config.api}/admin/users`,
-        { page, size, sort }
-      ).then(res => {
-        return res.data
-      })
-    }
+    post_cards: ({ no, secret, amount, created_id }) => postApi('/admin/cards', { no, secret, amount, created_id }),
+    cards: ({ page, size, sort }) => postApi('/admin/cards', { page, size, sort }),
+    announces: () => getApi('/admin/announces/list'),
+    add_announce: ({ content, url }) => postApi('/admin/announces', { content, url }),
+    delete_announces: (id) => postApi('/admin/announces/delete', { id }),
+    users: ({ page, size, sort }) => postApi('/admin/users', { page, size, sort })
   },
   consumption: {
-    post ({ amount, item_id, item_img, item_link }) {
-      return fly.post(`${config.api}/consumption`,
-        { amount, item_id, item_img, item_link }, FORM_DATA_HEADER
-      ).then(res => {
-        return res.data
-      })
-    },
-    list ({ page, size, sort }) {
-      return fly.get(`${config.api}/consumption/list`,
-        { page, size, sort }
-      ).then(res => {
-        return res.data
-      })
-    }
+    post: ({ amount, item_id, item_img, item_link }) => postApi('/consumption', { amount, item_id, item_img, item_link }),
+    list: ({ page, size, sort }) => postApi('/consumption/list', { page, size, sort })
   },
   recharge: {
-    post ({ no, secret }) {
-      return fly.post(`${config.api}/recharge`,
-        { no, secret }, FORM_DATA_HEADER
-      ).then(res => {
-        return res.data
-      })
-    },
-    list ({ page, size, sort }) {
-      return fly.get(`${config.api}/recharge/list`,
-        { page, size, sort }
-      ).then(res => {
-        return res.data
-      })
-    }
+    post: ({ no, secret }) => postApi('/recharge', { no, secret }),
+    list: ({ page, size, sort }) => postApi('/recharge/list', { page, size, sort })
   },
   user: {
-    setToken (token) {
-      fly.config.headers = Object.assign(fly.config.headers, { 'Authorization': 'Bearer ' + token })
-    },
-    clearToken () {
-      delete fly.config.headers['Authorization']
-    },
-    info () {
-      return fly.get(`${config.api}/user/info`).then(res => res.data)
-    },
-    sendSms (phone) {
-      return fly.post(`${config.api}/user/sendSms`, { phone }, FORM_DATA_HEADER)
-    },
-    login ({ phone, code }) {
-      return fly.post(`${config.api}/user/login`, { phone, code }, FORM_DATA_HEADER)
-        .then(res => {
-          const data = res.data
-          fly.config.headers = Object.assign(fly.config.headers, { 'Authorization': 'Bearer ' + data.token })
-          return data
-        })
+    setToken: internalSetToken,
+    clearToken: () => { delete fly.config.headers['Authorization'] },
+    info: () => getApi('/user/info'),
+    sendSms: (phone) => postApi('/user/sendSms', { phone }),
+    login: ({ phone, code }) => {
+      return postApi('/user/login', { phone, code }).then(data => {
+        internalSetToken(data.token)
+        return data
+      })
     }
   },
   wx: {
-    login (data) {
-      return fly.post(`${config.api}/wx/login`, data, FORM_DATA_HEADER)
-        .then(res => {
-          const data = res.data
-          fly.config.headers = Object.assign(fly.config.headers, { 'Authorization': 'Bearer ' + data.token })
+    login: (data) => {
+      return postApi('/wx/login', data)
+        .then(data => {
+          internalSetToken(data.token)
           return data
         })
     }
