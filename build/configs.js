@@ -1,12 +1,10 @@
 const path = require('path')
 const buble = require('rollup-plugin-buble')
 const replace = require('rollup-plugin-replace')
-const node_resolve = require('@rollup/plugin-node-resolve')
-
 const version = process.env.VERSION || require('../package.json').version
 const banner =
 `/**
- * reward js api v${version}
+ * reward-api v${version}
  * (c) ${new Date().getFullYear()} Jun Tsai
  * @license Apache-2.0
  */`
@@ -66,8 +64,10 @@ function genConfig (opts) {
       banner,
       file: opts.file,
       format: opts.format,
-      name: 'Reward'
-    }
+      name: 'reward-api'
+    },
+    // 指出应将哪些模块视为外部模块
+    external: ['vue']
   }
 
   if (opts.env) {
@@ -77,9 +77,8 @@ function genConfig (opts) {
   }
 
   if (opts.transpile !== false) {
-    config.input.plugins.push(buble({ objectAssign: 'Object.assign' }))
+    config.input.plugins.push(buble())
   }
-  config.input.plugins.push(node_resolve())
 
   return config
 }

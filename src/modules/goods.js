@@ -1,4 +1,4 @@
-import { rest } from '../'
+import { rest } from '../api/index'
 import { HAODANKU_API_NAMES } from './../constants'
 
 function createHaodankuState () {
@@ -27,6 +27,7 @@ const mutations = {
   'itemlist' (state, res) {
     state.itemlist.data.push(...res.data)
     state.itemlist.min_id = res.min_id
+    console.log('modiy itemlist')
   },
   'item_detail' (state, res) {
     state.item_detail.data = res.data

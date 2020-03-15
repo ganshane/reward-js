@@ -5,6 +5,14 @@ import * as wxApi from './api/wx'
 import { rest } from './api/index'
 
 export class UserNotAuthorized {}
+export default {
+  version: '__VERSION__',
+  config,
+  store,
+  api,
+  wxApi,
+  rest
+}
 export {
   config,
   store,

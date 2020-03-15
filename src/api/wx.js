@@ -1,4 +1,4 @@
-import { rest, UserNotAuthorized } from '..'
+import { rest, UserNotAuthorized } from '../index'
 import { promisifyAll } from 'wx-promise-pro'
 
 function exportWxApi () {

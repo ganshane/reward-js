@@ -1,32 +1,38 @@
 {
   "name": "reward-api",
   "version": "1.0.24",
-  "description": "js api for reward app",
-  "main": "src/index.js",
+  "description": "api for reward app",
+  "main": "dist/reward-api.common.js",
+  "module": "dist/reward-api.esm.js",
+  "unpkg": "dist/reward-api.js",
+  "jsdelivr": "dist/reward-api.js",
   "files": [
-    "src"
+    "dist"
   ],
   "scripts": {
     "dev": "node examples/server.js",
+    "dev:dist": "rollup -wm -c build/rollup.dev.config.js",
+    "build": "npm run build:main",
+    "build:main": "node build/build.main.js",
     "release": "bash build/release.sh"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ganshane/reward-js.git"
+    "url": "git+https://github.com/ganshane/reward-api.git"
   },
-  "author": "Jun Tsai",
-  "license": "Apache-2.0",
+  "author": "Evan You",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ganshane/reward-js/issues"
+    "url": "https://github.com/ganshane/reward-api/issues"
   },
-  "homepage": "https://github.com/ganshane/reward-js#readme",
+  "homepage": "https://github.com/ganshane/reward-api#readme",
   "peerDependencies": {
     "vue": "^2.0.0",
     "vuex": "^3.0.0",
-    "flyio": "^0.6.14"
+    "flyio": "^0.6.14",
+    "wx-promise-pro": "^3.2.0"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^7.1.1",
     "babel-core": "^6.22.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
@@ -52,13 +58,8 @@
     "vue-template-compiler": "^2.5.22",
     "vuepress": "^0.14.1",
     "vuepress-theme-vue": "^1.1.0",
-    "vuex": "^3.0.1",
     "webpack": "^4.8.3",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.19.1"
-  },
-  "dependencies": {
-    "flyio": "^0.6.14",
-    "wx-promise-pro": "^3.2.0"
   }
 }
