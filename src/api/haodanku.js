@@ -44,7 +44,7 @@ class Haodanku {
   ratesurl (parameters) {
     const defaultParameters = { 'apikey': config.haodankuKey, 'tb_name': config.haodanku_taobao_name, 'pid': config.taobaoke_pid }
     const values = Object.assign(defaultParameters, parameters)
-    return this.fly().post(`${config.haodanku_taobao_name}/ratesurl`, values, FORM_DATA_HEADER)
+    return this.fly().post(`${config.haodankuApi}/ratesurl`, values, FORM_DATA_HEADER)
       .then(res => {
         const resData = (typeof (res.data) === 'string') ? JSON.parse(res.data) : res.data
         if (resData.code === 0) {

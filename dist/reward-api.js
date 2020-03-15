@@ -1,5 +1,5 @@
 /**
- * reward-api v1.0.28
+ * reward-api v1.0.29
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -216,7 +216,7 @@
   Haodanku.prototype.ratesurl = function ratesurl (parameters) {
     var defaultParameters = { 'apikey': config.haodankuKey, 'tb_name': config.haodanku_taobao_name, 'pid': config.taobaoke_pid };
     var values = Object.assign(defaultParameters, parameters);
-    return this.fly().post(((config.haodanku_taobao_name) + "/ratesurl"), values, FORM_DATA_HEADER$1)
+    return this.fly().post(((config.haodankuApi) + "/ratesurl"), values, FORM_DATA_HEADER$1)
       .then(function (res) {
         var resData = (typeof (res.data) === 'string') ? JSON.parse(res.data) : res.data;
         if (resData.code === 0) {
