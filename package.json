@@ -1,6 +1,6 @@
 {
   "name": "reward-api",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "description": "api for reward app",
   "main": "dist/reward-api.common.js",
   "module": "dist/reward-api.esm.js",
