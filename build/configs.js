@@ -1,6 +1,7 @@
 const path = require('path')
 const buble = require('rollup-plugin-buble')
 const replace = require('rollup-plugin-replace')
+const peerDependencies = require('../package.json').peerDependencies
 const version = process.env.VERSION || require('../package.json').version
 const banner =
 `/**
@@ -8,7 +9,6 @@ const banner =
  * (c) ${new Date().getFullYear()} Jun Tsai
  * @license Apache-2.0
  */`
-
 const resolve = _path => path.resolve(__dirname, '../', _path)
 
 const configs = {
@@ -58,16 +58,16 @@ function genConfig (opts) {
         replace({
           __VERSION__: version
         })
-      ]
+      ],
+      external: Object.keys(peerDependencies)
     },
     output: {
       banner,
       file: opts.file,
       format: opts.format,
-      name: 'reward-api'
-    },
-    // 指出应将哪些模块视为外部模块
-    external: ['vue']
+      name: 'reward-api',
+      globals: { vue: 'vue', vuex: 'vuex', 'wx-promise-pro': 'wx-promise-pro' }
+    }
   }
 
   if (opts.env) {

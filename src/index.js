@@ -4,7 +4,6 @@ import api from './helpers'
 import * as wxApi from './api/wx'
 import { rest } from './api/index'
 
-export class UserNotAuthorized {}
 export {
   config,
   store,
@@ -12,6 +11,5 @@ export {
   wxApi,
   rest
 }
-
-// export * from './api'
+export * from './excpetions'
 

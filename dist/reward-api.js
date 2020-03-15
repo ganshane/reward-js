@@ -1,12 +1,12 @@
 /**
- * reward-api v1.0.25
+ * reward-api v1.0.26
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue'), require('vuex'), require('wx-promise-pro')) :
   typeof define === 'function' && define.amd ? define(['exports', 'vue', 'vuex', 'wx-promise-pro'], factory) :
-  (global = global || self, factory(global['reward-api'] = {}, global.Vue, global.Vuex, global.wxPromisePro));
+  (global = global || self, factory(global['reward-api'] = {}, global.vue, global.vuex, global['wx-promise-pro']));
 }(this, (function (exports, Vue, Vuex, wxPromisePro) { 'use strict';
 
   Vue = Vue && Object.prototype.hasOwnProperty.call(Vue, 'default') ? Vue['default'] : Vue;
@@ -429,6 +429,8 @@
     }
   };
 
+  var UserNotAuthorized = function UserNotAuthorized () {};
+
   function exportWxApi () {
     if (typeof (wx) !== 'undefined') {
       wxPromisePro.promisifyAll();
@@ -466,10 +468,6 @@
     __proto__: null,
     getUserInfo: getUserInfo
   });
-
-  var UserNotAuthorized = function UserNotAuthorized () {};
-
-  // export * from './api'
 
   exports.UserNotAuthorized = UserNotAuthorized;
   exports.api = helpers;

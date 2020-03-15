@@ -1,5 +1,5 @@
 /**
- * reward-api v1.0.25
+ * reward-api v1.0.26
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -430,6 +430,8 @@ var helpers = {
   }
 };
 
+var UserNotAuthorized = function UserNotAuthorized () {};
+
 function exportWxApi () {
   if (typeof (wx) !== 'undefined') {
     wxPromisePro.promisifyAll();
@@ -467,10 +469,6 @@ var wx$1 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   getUserInfo: getUserInfo
 });
-
-var UserNotAuthorized = function UserNotAuthorized () {};
-
-// export * from './api'
 
 exports.UserNotAuthorized = UserNotAuthorized;
 exports.api = helpers;
