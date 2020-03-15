@@ -57,6 +57,14 @@ class Haodanku {
   }
 
   /**
+ * 关键词商品页API
+* https://www.haodanku.com/api/detail/show/5.html
+*/
+  get_keyword_items (parameters) {
+    const parameterNames = ['keyword', 'shopid', 'back', 'sort', 'cid', 'min_id', 'price_min', 'price_max', 'sale_min', 'sale_max', 'coupon_min', 'coupon_max', 'type']
+    return this.baseHaodanku('get_keyword_items', parameterNames, {}, parameters)
+  }
+  /**
  * 今日值得买API
  * https://www.haodanku.com/api/detail/show/28.html
  */

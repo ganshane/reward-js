@@ -15,7 +15,8 @@ class Taofenxiang {
     this.internalSetToken = (token) => { this.fly().config.headers = Object.assign(this.fly().config.headers, { 'Authorization': 'Bearer ' + token }) }
     this.public = {
       announces: () => this._get('/public/announces'),
-      slides: () => this._get('/public/slides')
+      slides: () => this._get('/public/slides'),
+      create_tpwd: ({ text, url, logo }) => this._post('/public/tpwd', { text, url, logo })
     }
     this.admin = {
       add_card: ({ no, secret, amount, created_id }) => this._post('/admin/card/add', { no, secret, amount, created_id }),

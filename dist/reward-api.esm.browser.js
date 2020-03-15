@@ -1,5 +1,5 @@
 /**
- * reward-api v1.0.27
+ * reward-api v1.0.28
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -47,7 +47,8 @@ class Taofenxiang {
     this.internalSetToken = (token) => { this.fly().config.headers = Object.assign(this.fly().config.headers, { 'Authorization': 'Bearer ' + token }); };
     this.public = {
       announces: () => this._get('/public/announces'),
-      slides: () => this._get('/public/slides')
+      slides: () => this._get('/public/slides'),
+      create_tpwd: ({ text, url, logo }) => this._post('/public/tpwd', { text, url, logo })
     };
     this.admin = {
       add_card: ({ no, secret, amount, created_id }) => this._post('/admin/card/add', { no, secret, amount, created_id }),
@@ -152,6 +153,14 @@ class Haodanku {
       })
   }
 
+  /**
+ * 关键词商品页API
+* https://www.haodanku.com/api/detail/show/5.html
+*/
+  get_keyword_items (parameters) {
+    const parameterNames = ['keyword', 'shopid', 'back', 'sort', 'cid', 'min_id', 'price_min', 'price_max', 'sale_min', 'sale_max', 'coupon_min', 'coupon_max', 'type'];
+    return this.baseHaodanku('get_keyword_items', parameterNames, {}, parameters)
+  }
   /**
  * 今日值得买API
  * https://www.haodanku.com/api/detail/show/28.html
@@ -389,7 +398,7 @@ var wxApi = /*#__PURE__*/Object.freeze({
 });
 
 var index_esm = {
-  version: '1.0.27',
+  version: '1.0.28',
   config,
   store,
   api: helpers,
