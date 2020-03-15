@@ -14,7 +14,7 @@ function createHaodankuApi () {
   HAODANKU_API_NAMES.forEach(e => {
     methods[e] = function ({ commit, state }, parameters) {
       const parameterWithMinId = Object.assign({ min_id: state[e]['min_id'] }, parameters)
-      rest['haodanku'][e].call(this, parameterWithMinId).then(res => {
+      rest['haodanku'][e](parameterWithMinId).then(res => {
         commit(e, res)
       })
     }
@@ -27,7 +27,6 @@ const mutations = {
   'itemlist' (state, res) {
     state.itemlist.data.push(...res.data)
     state.itemlist.min_id = res.min_id
-    console.log('modiy itemlist')
   },
   'item_detail' (state, res) {
     state.item_detail.data = res.data

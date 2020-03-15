@@ -4,7 +4,8 @@ import Counter from './Counter.vue'
 import { config, store } from 'reward-api'
 
 config.haodankuKey = 'gofanli'
-config.isWx = true
+config.isWx = false
+
 Vue.prototype.$store = store
 
 new Vue({
