@@ -1,5 +1,5 @@
 /**
- * reward-api v1.0.31
+ * reward-api v1.0.32
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -151,6 +151,8 @@
         var phone = ref.phone;
         var code = ref.code;
 
+        // 登录之前删除token
+        this$1.user.clearToken();
         return this$1._post('/user/login', { phone: phone, code: code }).then(function (data) {
           this$1.internalSetToken(data.token);
           return data

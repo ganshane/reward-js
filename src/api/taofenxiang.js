@@ -49,6 +49,8 @@ class Taofenxiang {
       info: () => this._get('/user/info'),
       sendSms: (phone) => this._post('/user/sendSms', { phone }),
       login: ({ phone, code }) => {
+        // 登录之前删除token
+        this.user.clearToken()
         return this._post('/user/login', { phone, code }).then(data => {
           this.internalSetToken(data.token)
           return data

@@ -1,5 +1,5 @@
 /**
- * reward-api v1.0.31
+ * reward-api v1.0.32
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -81,6 +81,8 @@ class Taofenxiang {
       info: () => this._get('/user/info'),
       sendSms: (phone) => this._post('/user/sendSms', { phone }),
       login: ({ phone, code }) => {
+        // 登录之前删除token
+        this.user.clearToken();
         return this._post('/user/login', { phone, code }).then(data => {
           this.internalSetToken(data.token);
           return data
@@ -401,7 +403,7 @@ var wxApi = /*#__PURE__*/Object.freeze({
 });
 
 var index_esm = {
-  version: '1.0.31',
+  version: '1.0.32',
   config,
   store,
   api: helpers,
