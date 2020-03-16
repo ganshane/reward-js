@@ -1,5 +1,5 @@
 /**
- * reward-api v1.0.29
+ * reward-api v1.0.30
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -72,7 +72,7 @@
         var size = ref.size;
         var sort = ref.sort;
 
-        return this$1._post('/admin/card/list', { page: page, size: size, sort: sort });
+        return this$1._get('/admin/card/list', { page: page, size: size, sort: sort });
     },
 
       add_slide: function (ref) {
@@ -104,7 +104,7 @@
         var size = ref.size;
         var sort = ref.sort;
 
-        return this$1._post('/admin/users', { page: page, size: size, sort: sort });
+        return this$1._get('/admin/users', { page: page, size: size, sort: sort });
     }
     };
     this.consumption = {
@@ -121,7 +121,7 @@
         var size = ref.size;
         var sort = ref.sort;
 
-        return this$1._post('/consumption/list', { page: page, size: size, sort: sort });
+        return this$1._get('/consumption/list', { page: page, size: size, sort: sort });
     }
     };
     this.recharge = {
@@ -136,7 +136,7 @@
         var size = ref.size;
         var sort = ref.sort;
 
-        return this$1._post('/recharge/list', { page: page, size: size, sort: sort });
+        return this$1._get('/recharge/list', { page: page, size: size, sort: sort });
     }
     };
     this.user = {

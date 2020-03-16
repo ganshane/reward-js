@@ -20,7 +20,7 @@ class Taofenxiang {
     }
     this.admin = {
       add_card: ({ no, secret, amount, created_id }) => this._post('/admin/card/add', { no, secret, amount, created_id }),
-      cards: ({ page, size, sort }) => this._post('/admin/card/list', { page, size, sort }),
+      cards: ({ page, size, sort }) => this._get('/admin/card/list', { page, size, sort }),
 
       add_slide: ({ img_url, url, status }) => this._post('/admin/slide/add', { img_url, url, status }),
       delete_slide: (id) => this._post('/admin/slide/delete', { id }),
@@ -30,15 +30,15 @@ class Taofenxiang {
       add_announce: ({ content, url }) => this._post('/admin/announce/add', { content, url }),
       delete_announce: (id) => this._post('/admin/announce/delete', { id }),
       announces: () => this._get('/admin/announce/list'),
-      users: ({ page, size, sort }) => this._post('/admin/users', { page, size, sort })
+      users: ({ page, size, sort }) => this._get('/admin/users', { page, size, sort })
     }
     this.consumption = {
       add: ({ amount, item_id, item_img, item_link }) => this._post('/consumption/add', { amount, item_id, item_img, item_link }),
-      list: ({ page, size, sort }) => this._post('/consumption/list', { page, size, sort })
+      list: ({ page, size, sort }) => this._get('/consumption/list', { page, size, sort })
     }
     this.recharge = {
       add: ({ no, secret }) => this._post('/recharge/add', { no, secret }),
-      list: ({ page, size, sort }) => this._post('/recharge/list', { page, size, sort })
+      list: ({ page, size, sort }) => this._get('/recharge/list', { page, size, sort })
     }
     this.user = {
       setToken: this.internalSetToken,
