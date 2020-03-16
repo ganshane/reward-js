@@ -1,5 +1,5 @@
 /**
- * reward-api v1.0.30
+ * reward-api v1.0.31
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -105,7 +105,10 @@
         var sort = ref.sort;
 
         return this$1._get('/admin/users', { page: page, size: size, sort: sort });
-    }
+    },
+      aliyun: {
+        oss: function () { return this$1._get('/admin/aliyun/oss'); }
+      }
     };
     this.consumption = {
       add: function (ref) {

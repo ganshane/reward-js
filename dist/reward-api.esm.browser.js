@@ -1,5 +1,5 @@
 /**
- * reward-api v1.0.30
+ * reward-api v1.0.31
  * (c) 2020 Jun Tsai
  * @license Apache-2.0
  */
@@ -62,7 +62,10 @@ class Taofenxiang {
       add_announce: ({ content, url }) => this._post('/admin/announce/add', { content, url }),
       delete_announce: (id) => this._post('/admin/announce/delete', { id }),
       announces: () => this._get('/admin/announce/list'),
-      users: ({ page, size, sort }) => this._get('/admin/users', { page, size, sort })
+      users: ({ page, size, sort }) => this._get('/admin/users', { page, size, sort }),
+      aliyun: {
+        oss: () => this._get('/admin/aliyun/oss')
+      }
     };
     this.consumption = {
       add: ({ amount, item_id, item_img, item_link }) => this._post('/consumption/add', { amount, item_id, item_img, item_link }),
@@ -398,7 +401,7 @@ var wxApi = /*#__PURE__*/Object.freeze({
 });
 
 var index_esm = {
-  version: '1.0.30',
+  version: '1.0.31',
   config,
   store,
   api: helpers,

@@ -30,7 +30,10 @@ class Taofenxiang {
       add_announce: ({ content, url }) => this._post('/admin/announce/add', { content, url }),
       delete_announce: (id) => this._post('/admin/announce/delete', { id }),
       announces: () => this._get('/admin/announce/list'),
-      users: ({ page, size, sort }) => this._get('/admin/users', { page, size, sort })
+      users: ({ page, size, sort }) => this._get('/admin/users', { page, size, sort }),
+      aliyun: {
+        oss: () => this._get('/admin/aliyun/oss')
+      }
     }
     this.consumption = {
       add: ({ amount, item_id, item_img, item_link }) => this._post('/consumption/add', { amount, item_id, item_img, item_link }),
